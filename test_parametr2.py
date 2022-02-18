@@ -23,6 +23,10 @@ answer = math.log(int(time.time()))
 
 @pytest.fixture(scope="function")
 def browser():
+    """Starts the browser and stops it when the test is over 
+    
+    :return: None
+    """
     print("\nstart browser for test..")
     browser = webdriver.Chrome()
     # browser.implicitly_wait
@@ -30,9 +34,14 @@ def browser():
     print("\nquit browser..")
     browser.quit()
 
-
 @pytest.mark.parametrize('links', LINKS)
 def test_guest_should_see_login_link(browser, links):
+    """Gathers pieces of messages from functional feedback together 
+
+    :param: browser: selenium browser object, links
+
+    :return: None
+    """
     link = f"{links}/"
     browser.get(link)
 
@@ -56,4 +65,8 @@ def test_guest_should_see_login_link(browser, links):
 
 
 def test_output_answer():
+    """Outputs the answer 
+
+    :return: None
+    """
     print("\n******* answer: ", "".join(text_storage), "*******")

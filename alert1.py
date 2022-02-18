@@ -3,7 +3,13 @@ import time
 import math
 
 def calc(x):
-  return str(math.log(abs(12*math.sin(int(x)))))
+    """Calculates using the formula 
+
+    :param: x
+
+    :return: formula value in string format 
+    """
+    return str(math.log(abs(12*math.sin(int(x)))))
 
 # webdriver это и есть набор команд для управления браузером
 from selenium import webdriver
@@ -16,7 +22,7 @@ driver = webdriver.Chrome()
 time.sleep(1)
 
 # Метод get сообщает браузеру, что нужно открыть сайт по указанной ссылке
-driver.get("http://suninjuly.github.io/redirect_accept.html")
+driver.get("http://suninjuly.github.io/alert_accept.html")
 time.sleep(1)
 
 
@@ -26,9 +32,8 @@ submit_button = driver.find_element_by_css_selector('[type="submit"]')
 # Скажем драйверу, что нужно нажать на кнопку. После этой команды мы должны увидеть сообщение о правильном ответе
 submit_button.click()
 
-new_window = driver.window_handles[1]
-driver.switch_to.window(new_window)
-
+confirm = driver.switch_to.alert
+confirm.accept()
 
 x_element = driver.find_element_by_css_selector('[id="input_value"]')
 x = x_element.text
